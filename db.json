@@ -1,0 +1,255 @@
+{
+  "ars": [
+    { "id": "1", "name": "ARS Humano", "src": "/images/ars/ars_humano.png" },
+    { "id": "2", "name": "ARS Universal", "src": "/images/ars/ars_universal.png" },
+    { "id": "3", "name": "ARS Palic", "src": "/images/ars/ars_pallic.png" },
+    { "id": "4", "name": "ARS Mapfre", "src": "/images/ars/ars_mapfre.png" },
+    { "id": "5", "name": "ARS Senasa", "src": "/images/ars/ars_senasa.png" }
+  ],
+  "specialties": [
+    { "id": "1", "name": "Medicina General", "time": 1800000 },
+    { "id": "2", "name": "Pediatría", "time": 1800000 },
+    { "id": "3", "name": "Ginecología", "time": 1800000 },
+    { "id": "4", "name": "Cardiología", "time": 1800000 },
+    { "id": "5", "name": "Dermatología", "time": 1800000 },
+    { "id": "6", "name": "Nutrición", "time": 1800000 },
+    { "id": "7", "name": "Medicina Ocupacional", "time": 1800000 },
+    { "id": "8", "name": "Odontología General", "time": 1800000 },
+    { "id": "9", "name": "Ortodoncia", "time": 1800000 },
+    { "id": "10", "name": "Endodoncia", "time": 1800000 },
+    { "id": "11", "name": "Periodoncia", "time": 1800000 },
+    { "id": "12", "name": "Cirugía Oral", "time": 1800000 }
+  ],
+  "procedures": [
+    { "id": "1", "name": "Consulta General" },
+    { "id": "2", "name": "Electrocardiograma" },
+    { "id": "3", "name": "Prueba PCR COVID-19" },
+    { "id": "4", "name": "Consulta Odontológica" },
+    { "id": "5", "name": "Limpieza Dental" },
+    { "id": "6", "name": "Extracción Dental" },
+    { "id": "7", "name": "Ortodoncia" }
+  ],
+  "providers": [
+    {
+      "id": "1",
+      "name": "Punto Médico",
+      "phone": "809-338-3338",
+      "whatsApp": "809-338-3338",
+      "email": "info@puntomedico.com.do",
+      "website": "https://www.puntomedico.com.do/",
+      "LinkedIn": "https://www.linkedin.com/company/punto-medico-rd/",
+      "status": true,
+      "totalBranches": {
+        "active": 30,
+        "total": 30
+      },
+      "totalDoctors": {
+        "active": 100,
+        "total": 120
+      },
+      "affiliatedArs": ["1", "2", "3", "4", "5"],
+      "specialties": ["1", "2", "3", "4", "5"],
+      "procedures": ["1", "2", "3"]
+    },
+    {
+      "id": "2",
+      "src": "https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=800&auto=format&fit=crop&q=60",
+      "name": "Salud Bucal",
+      "phone": "809-338-9988",
+      "whatsApp": "809-338-9988",
+      "email": "info@saludbucal.com.do",
+      "website": "https://www.saludbucal.com.do/",
+      "LinkedIn": "https://www.linkedin.com/company/salud-bucal-rd/",
+      "status": false,
+      "totalBranches": {
+        "active": 22,
+        "total": 22
+      },
+      "totalDoctors": {
+        "active": 50,
+        "total": 60
+      },
+      "affiliatedArs": ["1", "2", "3", "4", "5"],
+      "specialties": ["8", "9", "10", "11", "12"],
+      "procedures": ["4", "5", "6", "7"]
+    }
+  ],
+  "branches": [
+    {
+      "id": "1",
+      "providerId": "1",
+      "name": "Punto Médico - Megacentro",
+      "address": "Avenida San Vicente de Paúl, Santo Domingo Este",
+      "paymentMethods": ["Cash", "Card"],
+      "facilities": ["Parking", "WiFi", "Accessibility"],
+      "specialties": [
+        {
+          "id": "1",
+          "name": "Medicina General",
+          "procedures": [
+            { "id": "1", "name": "Consulta General" },
+            { "id": "2", "name": "Electrocardiograma" }
+          ]
+        },
+        {
+          "id": "2",
+          "name": "Pediatría",
+          "procedures": []
+        }
+      ],
+      "ars": ["1", "2", "3"]
+    },
+    {
+      "id": "3",
+      "providerId": "1",
+      "name": "Punto Médico - Lope de Vega",
+      "address": "Avenida Lope de Vega, Santo Domingo",
+      "paymentMethods": ["Cash", "Card"],
+      "facilities": ["WiFi", "Accessibility"],
+      "specialties": [
+        {
+          "id": "3",
+          "name": "Ginecología",
+          "procedures": [{ "id": "1", "name": "Consulta General" }]
+        }
+      ],
+      "ars": ["2", "3", "4"]
+    },
+    {
+      "id": "4",
+      "providerId": "1",
+      "name": "Punto Médico - Bella Vista",
+      "address": "Calle Bella Vista, Santo Domingo",
+      "paymentMethods": ["Cash"],
+      "facilities": ["Parking"],
+      "specialties": [
+        {
+          "id": "4",
+          "name": "Cardiología",
+          "procedures": [{ "id": "2", "name": "Electrocardiograma" }]
+        }
+      ],
+      "ars": ["1", "4", "5"]
+    },
+    {
+      "id": "5",
+      "providerId": "1",
+      "name": "Punto Médico - Santiago",
+      "address": "Calle El Progreso, Santiago de los Caballeros",
+      "paymentMethods": ["Cash", "Card"],
+      "facilities": ["WiFi", "Accessibility"],
+      "specialties": [
+        {
+          "id": "5",
+          "name": "Dermatología",
+          "procedures": []
+        }
+      ],
+      "ars": ["1", "2", "5"]
+    },
+    {
+      "id": "6",
+      "providerId": "1",
+      "name": "Punto Médico - La Romana",
+      "address": "Avenida Independencia, La Romana",
+      "paymentMethods": ["Card"],
+      "facilities": ["Parking", "WiFi"],
+      "specialties": [
+        {
+          "id": "7",
+          "name": "Medicina Ocupacional",
+          "procedures": []
+        }
+      ],
+      "ars": ["3", "4"]
+    },
+    {
+      "id": "2",
+      "providerId": "2",
+      "name": "Salud Bucal - Megacentro",
+      "address": "Avenida San Vicente de Paúl, Santo Domingo Este",
+      "paymentMethods": ["Cash", "Card"],
+      "facilities": ["Parking", "WiFi"],
+      "specialties": [
+        {
+          "id": "8",
+          "name": "Odontología General",
+          "procedures": [
+            { "id": "4", "name": "Consulta Odontológica" },
+            { "id": "5", "name": "Limpieza Dental" }
+          ]
+        },
+        {
+          "id": "9",
+          "name": "Ortodoncia",
+          "procedures": [{ "id": "7", "name": "Ortodoncia" }]
+        }
+      ],
+      "ars": ["1", "2", "4", "5"]
+    },
+    {
+      "id": "7",
+      "providerId": "2",
+      "name": "Salud Bucal - Plaza Central",
+      "address": "Avenida 27 de Febrero, Santo Domingo",
+      "paymentMethods": ["Cash", "Card"],
+      "facilities": ["WiFi"],
+      "specialties": [
+        {
+          "id": "10",
+          "name": "Endodoncia",
+          "procedures": [{ "id": "6", "name": "Extracción Dental" }]
+        }
+      ],
+      "ars": ["2", "3", "4"]
+    },
+    {
+      "id": "8",
+      "providerId": "2",
+      "name": "Salud Bucal - Puerto Plata",
+      "address": "Avenida Principal, Puerto Plata",
+      "paymentMethods": ["Cash", "Card"],
+      "facilities": ["Parking"],
+      "specialties": [
+        {
+          "id": "11",
+          "name": "Periodoncia",
+          "procedures": []
+        }
+      ],
+      "ars": ["1", "5"]
+    },
+    {
+      "id": "9",
+      "providerId": "2",
+      "name": "Salud Bucal - Santiago",
+      "address": "Avenida Constitución, Santiago de los Caballeros",
+      "paymentMethods": ["Cash"],
+      "facilities": ["WiFi", "Accessibility"],
+      "specialties": [
+        {
+          "id": "12",
+          "name": "Cirugía Oral",
+          "procedures": []
+        }
+      ],
+      "ars": ["3", "4", "5"]
+    },
+    {
+      "id": "10",
+      "providerId": "2",
+      "name": "Salud Bucal - La Vega",
+      "address": "Calle Independencia, La Vega",
+      "paymentMethods": ["Cash", "Card"],
+      "facilities": ["Parking", "WiFi"],
+      "specialties": [
+        {
+          "id": "8",
+          "name": "Odontología General",
+          "procedures": [{ "id": "4", "name": "Consulta Odontológica" }]
+        }
+      ],
+      "ars": ["1", "2"]
+    }
+  ]
+}
