@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import ThemeRegistry from '../components/ThemeRegistry';
+import { Toaster } from 'react-hot-toast';
 
 export const metadata: Metadata = {
   title: 'Plataforma de Prestadores Médicos',
@@ -16,6 +17,7 @@ export default function RootLayout({
       <body>
         <ThemeRegistry>
           {children}
+          <Toaster />
         </ThemeRegistry>
       </body>
     </html>

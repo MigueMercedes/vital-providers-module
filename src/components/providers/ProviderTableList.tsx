@@ -30,7 +30,7 @@ export default function ProviderTableList({ providers = [] }: Props) {
             <TableCell>Estado</TableCell>
             <TableCell align="center">Sucursales</TableCell>
             <TableCell align="center">Doctores</TableCell>
-            <TableCell align="center">ARS</TableCell>
+            <TableCell align="center">Seguros</TableCell>
             <TableCell align="center">Especialidades</TableCell>
             <TableCell align="center">Procedimientos</TableCell>
           </TableRow>
@@ -136,7 +136,7 @@ export default function ProviderTableList({ providers = [] }: Props) {
                       icon="material-symbols:health-and-safety"
                       style={{ fontSize: "20px", color: "#2196f3" }}
                     />
-                    {provider.affiliatedArs.length}
+                    {provider.affiliatedInsurances.length}
                   </Box>
                 </TableCell>
                 <TableCell align="center">

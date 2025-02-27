@@ -2,7 +2,7 @@
 
 import baseQuery from "@/lib/baseQuery";
 import {
-  Ars,
+  Insurance,
   Branch,
   IResponse,
   Procedure,
@@ -43,10 +43,20 @@ export const getAllBranchesByProviderId = async (providerId: string) => {
   });
 };
 
-export const getAllArs = async () => {
-  return baseQuery<IResponse<Ars[]>>({
+// Add new server action for creating a branch
+export const createBranch = async (branch: Omit<Branch, "id">) => {
+  return baseQuery<IResponse<Branch>>({
     gateway: process.env.NEXT_PUBLIC_JSON_SERVER_URL,
-    url: `ars`,
+    url: `branches`,
+    method: "POST",
+    body: branch,
+  });
+};
+
+export const getAllInsurances = async () => {
+  return baseQuery<IResponse<Insurance[]>>({
+    gateway: process.env.NEXT_PUBLIC_JSON_SERVER_URL,
+    url: `insurances`,
     method: "GET",
   });
 };
@@ -68,10 +78,10 @@ export const getAllProcedures = async () => {
 };
 
 export const getProviderDetails = async (providerId: string) => {
-  const [providerRes, arsRes, specialtiesRes, proceduresRes] =
+  const [providerRes, insurancesRes, specialtiesRes, proceduresRes] =
     await Promise.all([
       getProviderById(providerId),
-      getAllArs(),
+      getAllInsurances(),
       getAllSpecialties(),
       getAllProcedures(),
     ]);
@@ -81,8 +91,8 @@ export const getProviderDetails = async (providerId: string) => {
   }
 
   const provider = providerRes.data;
-  const affiliatedArs = arsRes.data.filter((ars) =>
-    provider.affiliatedArs.includes(ars.id)
+  const affiliatedInsurances = insurancesRes.data.filter((insurance) =>
+    provider.affiliatedInsurances.includes(insurance.id)
   );
   const specialties = specialtiesRes.data.filter((spec) =>
     provider.specialties.includes(spec.id)
@@ -93,8 +103,20 @@ export const getProviderDetails = async (providerId: string) => {
 
   return {
     ...provider,
-    affiliatedArs,
+    affiliatedInsurances,
     specialties,
     procedures,
+  };
+};
+
+export const getProviderWithBranches = async (providerId: string) => {
+  const [providerDetailsResult, branchesResult] = await Promise.all([
+    getProviderDetails(providerId),
+    getAllBranchesByProviderId(providerId),
+  ]);
+
+  return {
+    provider: providerDetailsResult,
+    branches: branchesResult.data || [],
   };
 };

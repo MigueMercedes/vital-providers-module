@@ -1,10 +1,9 @@
-// Example usage in a page component
-import ProviderDetail from "@/components/providers/ProviderDetail";
+import ProviderDetail from "@/components/providers/ProviderDetail/index";
 import {
-  getProviderById,
-  getAllArs,
-  getAllSpecialties,
+  getAllInsurances,
   getAllProcedures,
+  getAllSpecialties,
+  getProviderById,
 } from "@/lib/server/providers/actions";
 
 export default async function ProviderPage({
@@ -16,33 +15,27 @@ export default async function ProviderPage({
 
   const [
     providerResponse,
-    arsResponse,
+    insurancesResponse,
     specialtiesResponse,
     proceduresResponse,
   ] = await Promise.all([
     getProviderById(providerId),
-    getAllArs(),
+    getAllInsurances(),
     getAllSpecialties(),
     getAllProcedures(),
   ]);
 
   const provider = providerResponse.data;
-  const ars = arsResponse.data;
+  const insurances = insurancesResponse.data;
   const specialties = specialtiesResponse.data;
   const procedures = proceduresResponse.data;
 
   return (
-    <div>
-      <h1>Detalle del Proveedor</h1>
-      <ProviderDetail
-        provider={provider}
-        ars={ars}
-        specialties={specialties}
-        procedures={procedures}
-        // onUpdate={() => {
-        //   // You might want to refresh data or redirect
-        // }}
-      />
-    </div>
+    <ProviderDetail
+      provider={provider}
+      insurances={insurances}
+      procedures={procedures}
+      specialties={specialties}
+    />
   );
 }

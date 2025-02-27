@@ -38,10 +38,10 @@ export default function ProviderContainer({
         />
 
         <Box sx={{ borderBottom: 1, borderColor: "divider", mb: 2 }}>
-            <Tabs value={view} onChange={(e, newValue) => setView(newValue)}>
+          <Tabs value={view} onChange={(e, newValue) => setView(newValue)}>
             <Tab label="Vista Tarjetas" value="card" />
             <Tab label="Vista Listado" value="table" />
-            </Tabs>
+          </Tabs>
         </Box>
 
         {view === "table" ? (

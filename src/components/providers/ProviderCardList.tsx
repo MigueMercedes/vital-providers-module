@@ -158,10 +158,10 @@ export default function ProviderCardList({ providers = [] }: Props) {
                           color="text.secondary"
                           sx={{ mt: 1 }}
                         >
-                          ARS
+                          Seguros
                         </Typography>
                         <Typography variant="subtitle1" fontWeight="medium">
-                          {provider.affiliatedArs.length}
+                          {provider.affiliatedInsurances.length}
                         </Typography>
                       </Paper>
                     </Grid>
