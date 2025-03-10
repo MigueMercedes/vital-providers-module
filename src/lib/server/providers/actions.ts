@@ -120,3 +120,12 @@ export const getProviderWithBranches = async (providerId: string) => {
     branches: branchesResult.data || [],
   };
 };
+
+export const createProvider = async (provider: Omit<ServiceProvider, "id">) => {
+  return baseQuery<IResponse<ServiceProvider>>({
+    gateway: process.env.NEXT_PUBLIC_JSON_SERVER_URL,
+    url: `providers`,
+    method: "POST",
+    body: provider,
+  });
+};

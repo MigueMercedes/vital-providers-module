@@ -210,7 +210,7 @@ export default function BranchesSection({ provider }: BranchesSectionProps) {
                 style={{ opacity: 0.6, marginBottom: 16 }}
               />
               <Typography color="text.secondary" align="center" mb={2}>
-                No hay sucursales disponibles para este proveedor
+                No hay sucursales disponibles para este Prestador
               </Typography>
               <Button
                 variant="outlined"

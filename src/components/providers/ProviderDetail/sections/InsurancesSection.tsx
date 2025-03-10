@@ -10,18 +10,24 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import { useState } from "react";
+import AddInsuranceModal from "../AddInsuranceModal";
 
 interface InsurancesSectionProps {
   provider: ServiceProvider;
   insurances: Insurance[];
-  onOpenModal: () => void;
 }
 
 export default function InsurancesSection({
   provider,
   insurances,
-  onOpenModal,
 }: InsurancesSectionProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
   return (
     <Card sx={{ flex: 1 }}>
       <CardContent>
@@ -31,10 +37,16 @@ export default function InsurancesSection({
           alignItems="center"
           mb={3}
         >
-          <Typography variant="h6" fontWeight="bold">
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+          >
             Seguros Afiliados
           </Typography>
-          <Button variant="contained" onClick={onOpenModal}>
+          <Button
+            variant="contained"
+            onClick={handleOpenModal}
+          >
             Agregar Seguro
           </Button>
         </Box>
@@ -55,7 +67,11 @@ export default function InsurancesSection({
                   alignItems="center"
                   justifyContent="space-between"
                 >
-                  <Box display="flex" alignItems="center" gap={1}>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    gap={1}
+                  >
                     <Avatar
                       src={insuranceItem.src}
                       sx={{ width: 32, height: 32 }}
@@ -63,10 +79,16 @@ export default function InsurancesSection({
                       {insuranceItem.name.charAt(0)}
                     </Avatar>
                     <Box>
-                      <Typography variant="subtitle1" fontWeight="medium">
+                      <Typography
+                        variant="subtitle1"
+                        fontWeight="medium"
+                      >
                         {insuranceItem.name}
                       </Typography>
-                      <Typography variant="body2" color="text.secondary">
+                      <Typography
+                        variant="body2"
+                        color="text.secondary"
+                      >
                         Cobertura completa
                       </Typography>
                     </Box>
@@ -82,6 +104,12 @@ export default function InsurancesSection({
             ))}
         </Stack>
       </CardContent>
+
+      <AddInsuranceModal
+        open={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onAdd={() => {}}
+      />
     </Card>
   );
 }

@@ -8,18 +8,28 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
-
+import AddInsuranceModal from "../AddInsuranceModal";
+import AddSpecialtyModal from "../AddSpecialtyModal";
+import { useState } from "react";
 interface SpecialtiesSectionProps {
   provider: ServiceProvider;
   specialties: Specialty[];
-  onOpenModal: () => void;
 }
 
 export default function SpecialtiesSection({
   provider,
   specialties,
-  onOpenModal,
 }: SpecialtiesSectionProps) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <Card sx={{ flex: 1 }}>
       <CardContent>
@@ -29,10 +39,16 @@ export default function SpecialtiesSection({
           alignItems="center"
           mb={3}
         >
-          <Typography variant="h6" fontWeight="bold">
+          <Typography
+            variant="h6"
+            fontWeight="bold"
+          >
             Especialidades
           </Typography>
-          <Button variant="contained" onClick={onOpenModal}>
+          <Button
+            variant="contained"
+            onClick={handleOpenModal}
+          >
             Agregar Especialidad
           </Button>
         </Box>
@@ -52,14 +68,23 @@ export default function SpecialtiesSection({
                   justifyContent="space-between"
                 >
                   <Box>
-                    <Typography variant="subtitle1" fontWeight="medium">
+                    <Typography
+                      variant="subtitle1"
+                      fontWeight="medium"
+                    >
                       {specialty.name}
                     </Typography>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography
+                      variant="body2"
+                      color="text.secondary"
+                    >
                       Tiempo de cita: {specialty.time / 60000} min
                     </Typography>
                   </Box>
-                  <Button variant="outlined" size="small">
+                  <Button
+                    variant="outlined"
+                    size="small"
+                  >
                     Editar
                   </Button>
                 </Box>
@@ -67,6 +92,12 @@ export default function SpecialtiesSection({
             ))}
         </Stack>
       </CardContent>
+
+      <AddSpecialtyModal
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        onAdd={() => {}}
+      />
     </Card>
   );
 }

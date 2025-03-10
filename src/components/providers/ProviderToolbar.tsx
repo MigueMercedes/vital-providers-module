@@ -2,6 +2,8 @@
 
 import { Icon } from "@iconify/react";
 import { Button, InputAdornment, Stack, TextField } from "@mui/material";
+import { useState } from "react";
+import CreateProviderModal from "./ProviderDetail/CreateProviderModal";
 
 interface Props {
   searchTerm: string;
@@ -14,11 +16,25 @@ export default function ProviderToolbar({
   onSearch,
   onAddProvider,
 }: Props) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <Stack direction={{ xs: "column", sm: "row" }} spacing={2} sx={{ mb: 4 }}>
+    <Stack
+      direction={{ xs: "column", sm: "row" }}
+      spacing={2}
+      sx={{ mb: 4 }}
+    >
       <TextField
         fullWidth
-        placeholder="Buscar proveedor..."
+        placeholder="Buscar Prestador..."
         value={searchTerm}
         onChange={(e) => onSearch(e.target.value)}
         InputProps={{
@@ -42,10 +58,19 @@ export default function ProviderToolbar({
         variant="contained"
         startIcon={<Icon icon="material-symbols:add" />}
         sx={{ minWidth: 160 }}
-        onClick={onAddProvider}
+        onClick={handleOpenModal}
       >
-        Nuevo Proveedor
+        Nuevo Prestador
       </Button>
+
+      <CreateProviderModal
+        open={isModalOpen}
+        onClose={handleCloseModal}
+        onProviderCreated={() => {
+          handleCloseModal();
+          onAddProvider();
+        }}
+      />
     </Stack>
   );
 }

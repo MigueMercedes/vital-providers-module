@@ -1,3 +1,4 @@
+import { updateProvider } from "@/lib/server/providers/actions";
 import { ServiceProvider } from "@/lib/types";
 import { Icon } from "@iconify/react";
 import {
@@ -14,32 +15,41 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useState } from "react";
+import { toast } from "react-hot-toast";
 
 interface GeneralInfoProps {
   provider: ServiceProvider;
 }
 
-export default function GeneralInfo({ provider }: GeneralInfoProps) {
+export default function GeneralInfo({ provider: initialProvider }: GeneralInfoProps) {
   const theme = useTheme();
+  const [isEditing, setIsEditing] = useState(false);
+  const [provider, setProvider] = useState<ServiceProvider>(initialProvider);
 
   const InfoField = ({
     label,
     value,
     icon,
     href,
+    field,
+    onChange,
   }: {
     label: string;
     value: string;
     icon: string;
     href?: string;
+    field?: keyof ServiceProvider;
+    onChange?: (value: string) => void;
   }) => (
     <TextField
       fullWidth
       label={label}
-      value={value || "No disponible"}
+      value={value || ""}
       variant="outlined"
+      onChange={(e) => onChange?.(e.target.value)}
       InputProps={{
-        readOnly: true,
+        readOnly: !isEditing,
         startAdornment: (
           <InputAdornment position="start">
             <Icon
@@ -51,7 +61,7 @@ export default function GeneralInfo({ provider }: GeneralInfoProps) {
           </InputAdornment>
         ),
         endAdornment:
-          href && value ? (
+          href && value && !isEditing ? (
             <InputAdornment position="end">
               <Button
                 size="small"
@@ -70,7 +80,6 @@ export default function GeneralInfo({ provider }: GeneralInfoProps) {
   const buildSocialLink = (type: string, value?: string): string => {
     if (!value) return "";
 
-    // Define normalization functions for each platform
     const normalizers = {
       website: (url: string) =>
         url.startsWith("http") ? url : `https://${url}`,
@@ -99,11 +108,47 @@ export default function GeneralInfo({ provider }: GeneralInfoProps) {
     return normalizer ? normalizer(value) : "";
   };
 
+  const handleSave = async () => {
+    try {
+      const response = await updateProvider(provider);
+
+      if (response.resp.codigo === 200) {
+        setIsEditing(false);
+        toast.success("Prestador actualizado correctamente");
+      } else {
+        toast.error(`Error: ${response.resp.mensaje}`);
+      }
+    } catch (err) {
+      console.error("Error updating provider:", err);
+      toast.error("Error al actualizar el Prestador");
+    }
+  };
+
+  const handleCancel = () => {
+    setProvider(initialProvider);
+    setIsEditing(false);
+  };
+
   return (
     <Card>
       <CardHeader
         title="Información General"
-        action={<Button variant="contained">Modificar</Button>}
+        action={
+          isEditing ? (
+            <Box>
+              <Button variant="outlined" onClick={handleCancel} sx={{ mr: 1 }}>
+                Cancelar
+              </Button>
+              <Button variant="contained" onClick={handleSave}>
+                Guardar
+              </Button>
+            </Box>
+          ) : (
+            <Button variant="contained" onClick={() => setIsEditing(true)}>
+              Modificar
+            </Button>
+          )
+        }
       />
       <CardContent sx={{ p: 3 }}>
         <Box display="flex" justifyContent="center">
@@ -119,13 +164,15 @@ export default function GeneralInfo({ provider }: GeneralInfoProps) {
             >
               {provider.name.charAt(0)}
             </Avatar>
-            <Button
-              variant="outlined"
-              startIcon={<Icon icon="lucide:camera" />}
-              size="small"
-            >
-              Cambiar Logo
-            </Button>
+            {isEditing && (
+              <Button
+                variant="outlined"
+                startIcon={<Icon icon="lucide:camera" />}
+                size="small"
+              >
+                Cambiar Logo
+              </Button>
+            )}
           </Stack>
         </Box>
 
@@ -136,9 +183,11 @@ export default function GeneralInfo({ provider }: GeneralInfoProps) {
               Información Básica
             </Typography>
             <InfoField
-              label="Nombre del Proveedor"
+              label="Nombre del Prestador"
               value={provider.name}
               icon="lucide:user"
+              field="name"
+              onChange={(value) => setProvider({ ...provider, name: value })}
             />
           </Grid>
 
@@ -154,6 +203,8 @@ export default function GeneralInfo({ provider }: GeneralInfoProps) {
                   value={provider.phone}
                   icon="lucide:phone"
                   href={buildSocialLink("phone", provider.phone)}
+                  field="phone"
+                  onChange={(value) => setProvider({ ...provider, phone: value })}
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -162,6 +213,8 @@ export default function GeneralInfo({ provider }: GeneralInfoProps) {
                   value={provider.email}
                   icon="lucide:mail"
                   href={buildSocialLink("email", provider.email)}
+                  field="email"
+                  onChange={(value) => setProvider({ ...provider, email: value })}
                 />
               </Grid>
             </Grid>
@@ -177,6 +230,8 @@ export default function GeneralInfo({ provider }: GeneralInfoProps) {
               value={provider.website}
               icon="lucide:globe"
               href={buildSocialLink("website", provider.website)}
+              field="website"
+              onChange={(value) => setProvider({ ...provider, website: value })}
             />
           </Grid>
 
@@ -192,6 +247,8 @@ export default function GeneralInfo({ provider }: GeneralInfoProps) {
                   value={provider.whatsApp}
                   icon="lucide:message-circle"
                   href={buildSocialLink("whatsApp", provider.whatsApp)}
+                  field="whatsApp"
+                  onChange={(value) => setProvider({ ...provider, whatsApp: value })}
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -200,6 +257,8 @@ export default function GeneralInfo({ provider }: GeneralInfoProps) {
                   value={provider.instagram}
                   icon="lucide:instagram"
                   href={buildSocialLink("instagram", provider.instagram)}
+                  field="instagram"
+                  onChange={(value) => setProvider({ ...provider, instagram: value })}
                 />
               </Grid>
               <Grid item xs={12} sm={4}>
@@ -208,6 +267,8 @@ export default function GeneralInfo({ provider }: GeneralInfoProps) {
                   value={provider.linkedIn}
                   icon="lucide:linkedin"
                   href={buildSocialLink("linkedIn", provider.linkedIn)}
+                  field="linkedIn"
+                  onChange={(value) => setProvider({ ...provider, linkedIn: value })}
                 />
               </Grid>
             </Grid>

@@ -2,7 +2,7 @@ import { z } from "zod";
 
 export const branchSchema = z.object({
   name: z.string().min(1, "El nombre es requerido"),
-  providerId: z.string().min(1, "El ID del proveedor es requerido"),
+  providerId: z.string().min(1, "El ID del Prestador es requerido"),
   address: z.string().min(1, "La dirección es requerida"),
   phone: z.string().min(1, "El teléfono es requerido"),
   openingTime: z.string().min(1, "La hora de apertura es requerida"),

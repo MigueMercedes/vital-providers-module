@@ -121,7 +121,7 @@
   "providers": [
     {
       "id": "1",
-      "name": "Punto Médico",
+      "name": "Punto Médicod",
       "phone": "809-338-3338",
       "whatsApp": "809-338-3338",
       "instagram": "https://www.instagram.com/puntomedico/",
@@ -196,6 +196,29 @@
         "6",
         "7"
       ]
+    },
+    {
+      "id": "60d4",
+      "name": "dsa",
+      "phone": "das",
+      "email": "das",
+      "website": "dsa",
+      "src": "",
+      "whatsApp": "",
+      "instagram": "",
+      "linkedIn": "",
+      "status": "active",
+      "totalBranches": {
+        "active": 0,
+        "total": 0
+      },
+      "totalDoctors": {
+        "active": 0,
+        "total": 0
+      },
+      "affiliatedInsurances": [],
+      "specialties": [],
+      "procedures": []
     }
   ],
   "branches": [

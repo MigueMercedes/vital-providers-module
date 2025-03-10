@@ -77,14 +77,20 @@ export default function AddInsuranceModal({
           justifyContent: "space-between",
         }}
       >
-        <Box display="flex" alignItems="center">
+        <Box
+          display="flex"
+          alignItems="center"
+        >
           <Icon
             icon="material-symbols:health-and-safety"
             style={{ marginRight: "12px", fontSize: "24px", color: "#10b981" }}
           />
           Agregar un seguro
         </Box>
-        <IconButton onClick={onClose} size="small">
+        <IconButton
+          onClick={onClose}
+          size="small"
+        >
           <Icon icon="material-symbols:close" />
         </IconButton>
       </DialogTitle>
@@ -127,7 +133,10 @@ export default function AddInsuranceModal({
               )}
             </Box>
             <Box sx={{ flex: 1 }}>
-              <Typography variant="subtitle2" gutterBottom>
+              <Typography
+                variant="subtitle2"
+                gutterBottom
+              >
                 Logo del Seguro
               </Typography>
               <Typography
